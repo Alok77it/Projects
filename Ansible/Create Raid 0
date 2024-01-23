@@ -1,0 +1,23 @@
+---
+- name: Create RAID
+ hosts: localhost
+ gather_facts: no
+ vars_prompt:
+    - name: "disk_path1"
+      prompt: "Enter the first disk path"
+      private: no
+
+    - name: "disk_path2"
+      prompt: "Enter the second disk path"
+      private: no
+
+ tasks:
+    - name: Create RAID0 array
+      ansible.builtin.command:
+        cmd: "mdadm --create /dev/md0 --level=0 --raid-devices=2 {{ disk_path1 }} {{ disk_path2 }}"
+      become: yes
+
+    - name: Start RAID0 array
+      ansible.builtin.command:
+        cmd: "mdadm --start /dev/md0"
+      become: yes

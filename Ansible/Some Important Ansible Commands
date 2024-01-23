@@ -1,0 +1,19 @@
+--> ansible ad hoc command to copy file - Local to remote
+
+    #ansible [group-name] -m copy -a "src=~/Downloads/index.html dest=/var/www/html owner=apache group=apache mode=0644"
+
+--> ansible ad hoc command to copy directory - Local to remote
+
+    #ansible [group-name] -m copy -a "src=~/Downloads/logos dest=/var/www/html/ owner=apache group=apache mode=0644 " 
+
+--> ad hoc command to list nfs mounts
+
+    #ansible [group-name] -m shell -a 'df -h -T|grep -i nfs'
+
+--> ad hoc command to display memory, cpu and OS distribution and version
+
+    #ansible [group-name] -m setup
+
+--> ansible ad hoc command to download a file from URL
+
+    #ansible [group-name] -m get_url -a "url=https://nodejs.org/dist/v14.17.4/node-v14.17.4-linux-x64.tar.xz dest=/tmp mode=0755"

@@ -1,0 +1,22 @@
+---
+- name: Extend VG
+  hosts: all
+  vars_prompt:
+    - name: disk_name
+      prompt: "Please enter the disk name"
+      private: no
+
+    - name: vg_name
+      prompt: "Please enter the volume group name"
+      private: no
+
+  tasks:
+    - name: Ensure the disk exists
+      stat:
+        path: "/dev/{{ disk_name }}"
+
+    - name: Ensure the VG exists
+      command: vgdisplay {{ vg_name }}
+
+    - name: Extend the VG with the disk
+      command: vgextend {{ vg_name }} {{ disk_name }}

@@ -1,0 +1,44 @@
+---
+- name: Create MySQL Server
+  hosts: Demo
+  become: yes
+  tasks:
+    - name: Install PyMySQL Server
+      yum:
+        name: MySQL-python
+        state: latest
+
+    - name: Install MySQL Server
+      yum:
+        name: mysql-community-server
+        state: latest
+
+    - name: Start and enable MySQL service
+      systemd:
+        name: mysqld
+        state: started
+        enabled: yes
+
+    - name: Get MySQL server version
+      command: "{{ item }}"
+      register: mysql_version
+      with_items:
+        - "/usr/bin/mysql --version"
+        - "/usr/bin/mysqladmin --version"
+      
+    - name: Create database
+      mysql_db:
+        name: my_database
+        state: present
+
+    - name: Create MySQL user
+      mysql_user:
+        name: alok
+        password: alok
+        state: present
+
+    - name: Ensure MySQL is running
+      systemd:
+        name: mysqld
+        state: started
+        enabled: yes

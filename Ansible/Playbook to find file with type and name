@@ -1,0 +1,41 @@
+---
+- name: Find file by name and file type
+  hosts: all
+  vars_prompt:
+    - name: "file_name"
+      prompt: "Enter file name"
+      private: no
+
+    - name: "file_type"
+      prompt: "Enter file type"
+      private: no
+
+    - name: "path"
+      prompt: "Enter file path"
+      private: no
+
+    - name: "permission"
+      prompt: "Enter file permission"
+      private: no
+
+    - name: "command"
+      prompt: "Enter execute command"
+      private: no
+
+  tasks:
+    - name: Find file by name and file type
+      ansible.builtin.find:
+        paths: "{{ path }}"
+        patterns: "{{ file_name }}"
+        file_type: "{{ file_type }}"
+      register: file_found
+
+    - name: Display file information
+      ansible.builtin.debug:
+        var: file_found.files[0]
+
+    - name: Set file permission
+      ansible.builtin.file:
+        path: "{{ file_found.files[0].path }}"
+        state: touch
+        mode: "{{ permission }}"

@@ -1,0 +1,28 @@
+---
+- name: Find string in file using grep
+  hosts: all
+  become: yes
+  vars_prompt:
+  - name: search_string
+    prompt: "Enter the string: "
+    private: no
+  
+  - name: path_of_target_file
+    prompt: "Enter the path of file: "
+    private: no
+
+  tasks:
+    - name: Ensure that the target file exists
+      ansible.builtin.stat:
+        path: "{{ path_of_target_file }}"
+      register: file_stats
+
+    - name: Perform grep to find the string in the file
+      ansible.builtin.command:
+        cmd: grep {{search_string}} {{path_of_target_file}}
+      register: grep_output
+      when: file_stats.stat.exists
+
+    - name: Display grep output
+      ansible.builtin.debug:
+        var: grep_output.stdout_lines

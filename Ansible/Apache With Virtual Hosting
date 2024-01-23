@@ -1,0 +1,96 @@
+---
+- name: Install and Configure Apache Server with Multiple Hosting and SSL
+  hosts: localhost
+  become: yes
+  tasks:
+    - name: Install Apache HTTP Server, firewalld, and mod_ssl
+      yum:
+        name: "{{ item }}"
+        state: latest
+      loop:
+        - httpd
+        - firewalld
+        - mod_ssl
+
+    - name: Enable Apache HTTP service, firewalld service, and mod_ssl
+      systemd:
+        name: "{{ item }}"
+        state: started
+        enabled: yes
+      loop:
+        - httpd
+        - firewalld
+
+    - name: Add httpd service to firewalld
+      firewalld:
+        service: http
+        permanent: yes
+        state: enabled
+
+    - name: Reload firewalld to apply the changes
+      command: "firewall-cmd --reload"
+
+    - name: Configure Virtual Hosting for first website
+      block:
+        - name: Create directories for the first website
+          file:
+            path: "/var/www/first-website.com"
+            state: directory
+            owner: apache
+            group: apache
+            mode: 0755
+
+        - name: Create the first website configuration file
+          copy:
+            src: "/files/first-website.conf"
+            dest: "/etc/httpd/conf.d/first-website.conf"
+            owner: root
+            group: root
+            mode: 0644
+
+    - name: Configure Virtual Hosting for second website
+      block:
+        - name: Create directories for the second website
+          file:
+            path: "/var/www/second-website.com"
+            state: directory
+            owner: apache
+            group: apache
+            mode: 0755
+
+        - name: Create the second website configuration file
+          copy:
+            src: "/files/second-website.conf"
+            dest: "/etc/httpd/conf.d/second-website.conf"
+            owner: root
+            group: root
+            mode: 0644
+
+    - name: Ensure Apache HTTP service is running after virtual hosting configuration
+      systemd:
+        name: httpd
+        state: started
+        enabled: yes
+
+    - name: Reload Apache HTTP service to apply the virtual hosting configuration
+      command: "systemctl reload httpd"
+
+
+
+# We need to create /file/first-website.conf
+#Content inside file
+
+<VirtualHost *:80>
+    ServerName example1.com
+    ServerAlias www.example1.com
+    ServerAdmin first@website.com
+    DocumentRoot /var/www/firstwebsite.com
+
+    <Directory /var/www/first-website.com>
+        Options -Indexes +FollowSymLinks
+        AllowOverride All
+    </Directory>
+
+    ErrorLog /var/log/httpd/first-website.com-error.log
+    CustomLog /var/log/httpd/first-website.log combined
+</VirtualHost>

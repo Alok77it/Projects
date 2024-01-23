@@ -1,0 +1,64 @@
+---
+- name: Create LVM partitions
+  hosts: all
+  vars_prompt:
+   - name: disk_path
+     prompt: "Enter disk path (e.g., /dev/sdb)"
+     private: no
+
+   - name: vg_name
+     prompt: "Enter volume group name (e.g., data_vg)"
+     private: no
+
+   - name: lv_name
+     prompt: "Enter logical volume name (e.g., data_lv)"
+     private: no
+
+   - name: lv_size
+     prompt: "Enter logical volume size (e.g., 10G)"
+     private: no
+
+  tasks:
+    - name: Create physical volume
+      ansible.builtin.shell: "pvcreate {{ disk_path }}"
+      register: pvcreate_output
+
+    - name: Create volume group
+      ansible.builtin.shell: "vgcreate {{ vg_name }} {{ disk_path }}"
+      register: vgcreate_output
+
+    - name: Create logical volume
+      ansible.builtin.shell: "lvcreate -L {{ lv_size }} -n {{ lv_name }} {{ vg_name }}"
+      register: lvcreate_output
+
+    - name: Format logical volume with ext4
+      ansible.builtin.shell: "mkfs.ext4 /dev/{{ vg_name }}/{{ lv_name }}"
+
+    - name: Create mount point
+      ansible.builtin.file:
+        path: "/data"
+        state: directory
+        owner: root
+        group: root
+        mode: 0755
+
+    - name: Add logical volume to fstab
+
+      ansible.builtin.lineinfile:
+        path: /etc/fstab
+        line: "/dev/{{ vg_name }}/{{ lv_name }} /data ext4 defaults 0 0"
+        insertafter: EOF
+
+    - name: Mount logical volume
+      ansible.builtin.shell: "mount /data"
+
+
+
+
+
+
+
+      #By setting private: no, you're instructing Ansible to display the user input as they type it.
+
+#On the other hand, if you set private: yes, Ansible will not display the user input as they type it. This can be useful 
+#when collecting sensitive information like passwords.

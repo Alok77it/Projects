@@ -1,0 +1,26 @@
+---
+- name: "Take inputs"
+  hosts: all
+  vars_prompt:
+    - name: "file_or_directory"
+      prompt: "Enter file or directory path"
+      private: no
+
+    - name: "permission"
+      prompt: "Enter permission (e.g., '0644')"
+      private: no
+
+    - name: "owner"
+      prompt: "Enter owner name"
+      private: no
+
+    - name: "group"
+      prompt: "Enter group name"
+      private: no
+
+  tasks:
+   - name: "Change permission"
+     command: chmod {{ permission }} {{file_or_directory}}
+
+   - name: "change ownership"
+     command: chown {{owner}}:{{group}} {{file_or_directory}}

@@ -1,0 +1,29 @@
+---
+- name: Create snapshot in existing LVM
+  hosts: localhost
+  gather_facts: no
+  tasks:
+    - name: Prompt for snapshot name
+      prompt:
+        name: snapshot_name
+        prompt: "Enter snapshot name"
+        private: no
+      register: snapshot_name
+
+    - name: Prompt for snapshot size
+      prompt:
+        name: snapshot_size
+        prompt: "Enter snapshot size (in MB)"
+        private: no
+      register: snapshot_size
+    
+    - name: Prompt for lv name 
+      prompt:
+        name: lv_name
+        prompt: "Path of LVM path"
+        private: no
+      register: lv_name
+
+
+    - name: Create LVM snapshot
+      command: lvcreate -L {{snapshot_size}} -s -n {{snapshot_name}} {{lv_name}}
