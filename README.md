@@ -9,7 +9,9 @@
 
 ###
 
-<img align="right" height="150" src="https://giphy.com/gifs/ToeiAnimation-one-piece-luffy-otama-KGd6ns7MR1gPCRT52z"/>
+<br clear="both">
+
+<img align="right" height="150" src="https://i.imgflip.com/65efzo.gif"  />
 
 ###
 
@@ -50,5 +52,7 @@
 </div>
 
 ###
+
+<img src="https://raw.githubusercontent.com/Alok77it/Alok77it/output/snake.svg" alt="Snake animation" />
 
 ###
