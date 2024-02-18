@@ -9,7 +9,7 @@
 
 ###
 
-<img align="right" height="150" src="https://giphy.com/gifs/ToeiAnimation-one-piece-luffy-otama-KGd6ns7MR1gPCRT52z"  />
+<img align="right" height="150" src="https://giphy.com/gifs/ToeiAnimation-one-piece-luffy-otama-KGd6ns7MR1gPCRT52z"/>
 
 ###
 
