@@ -1,0 +1,244 @@
+<!--
+  Hit RUN to see this project in action!
+  
+  This project will auto-refresh as you edit the HTML, CSS and JS. See README.md for more info (including how to disable auto-refresh and install packages).
+-->
+
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Slack Clone</title>
+    <link href="style.css" rel="stylesheet" type="text/css" />
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
+    ></script>
+  </head>
+  <body>
+
+    <!--Top Bar for Search and navigation-->
+    <nav>
+      <div class="top-bar">
+        <div class="navigation">
+          <button><ion-icon name="arrow-back-circle-outline" size="large"></ion-icon></i></button>
+          <button><ion-icon name="arrow-forward-circle-outline" size="large" ></ion-icon></button>
+        </div>
+
+        <form class="search-bar-form">
+          <input id="search-bar" placeholder="Work in Progress / Currently working on it." type="text" value="Search" />
+          <img class="search-icon" src="search-outline.svg" alt="Search Icon" />
+        </form>
+        
+        <div class="help">
+          <button><ion-icon name="help-circle-outline" size="large" ></ion-icon></button>
+        </div>  
+      </div>
+    </nav>
+
+    <!--Side Bar for Menus-->
+    <div class="slide-bar">
+      <button><ion-icon name="grid" size="large"></ion-icon></button>
+      <br>
+      <button><ion-icon name="home" size="large"></ion-icon></button>
+      <br>
+      <button><ion-icon name="chatbubbles" size="large"></ion-icon></button>
+      <br>
+      <button><ion-icon name="notifications" size="large"></ion-icon></button>
+      <br>
+    </div>
+
+    <div class="down">
+      <button><ion-icon name="add-circle" size="large"></ion-icon></button>
+      <br>
+      <button><ion-icon name="person" size="large"></ion-icon></button>
+    </div>
+
+
+    <!--Right-Box for chat and workspaces -->
+    <div class="blank-box">
+      <div class="box-title">
+        <h2>Channels & Inbox </h2>
+        <button><ion-icon name="filter" size="small"></ion-icon></button>
+        <button><ion-icon name="duplicate" size="small"></ion-icon></button>
+      </div>
+      <div class="chat-bar">
+        <div class="container">
+        <button id="thread"><span><ion-icon name="chatbubble-ellipses-outline"></ion-icon><span>Threads</span></span></button> 
+        </div>
+        <div class="container">
+          <button id="sent"><span><ion-icon name="paper-plane-outline"></ion-icon><span>Sent & Draft </span></span></button>
+        </div>
+      </div>
+      
+      <div class="channels-bar">
+        <div class="container">
+        <button><ion-icon name="caret-down-outline"></ion-icon></button> <span> Channels </span> <button><ion-icon name="chevron-down-outline"></ion-icon></button> 
+        </div>
+        <div class="container">
+        <button id="announcement"><span># announcements </span></button> 
+        </div>
+        <div class="container">
+        <button id="general"><span># General Chats  </span></button>
+        </div>
+        <div class="container">
+        <button  id="demoChannel"> <span># Demo-Channels  </span> </button>
+        </div>
+        <div class="container" id="channels-2">
+        <button id="channels"><ion-icon name="search-circle-outline"></ion-icon><span>Browse All Channels</span></button>
+        </div>
+      </div>
+      
+      <div class="message-box">
+        <div class="container">
+        <ion-icon name="caret-down-outline"></ion-icon></button><span>Direct Messages </span>
+        </div>
+        <div class="container">
+        <button id="demoProfile1"><ion-icon name="at-circle-outline"></ion-icon><span>Demo Profile 1 </span></button>
+        </div>
+        <div class="container">
+        <button id="demoProfile2"><ion-icon name="at-circle-outline"></ion-icon><span>Demo Profile 2</span></button>
+        </div>
+        <div class="container" id="worker-2">
+        <button id="worker"><ion-icon name="search-circle-outline"></ion-icon><span>Add Co-Workers </span></button>
+        </div>
+      </div>
+      
+      <div class="app-box">
+        <div class="container">
+        <button><ion-icon name="caret-down-outline"></ion-icon></button><span>Apps & Plugins </span>
+        </div>
+        <div class="container">
+        <button id="demoApp1"><ion-icon name="cube-outline"></ion-icon><span>Demo App</span>
+        </div>
+        <div class="container" id="app-box-2">
+        <button id="plugins"><ion-icon name="search-circle-outline"></ion-icon><span>Add Apps & Plugins </span></button>
+      </div>
+    </div>
+
+
+<!--Right Side Chat box for chatting and ticketing -->
+    <div class="chat-box">
+      <div id="thread-1">
+        <div class="header1">
+          <h2>Threads </h2>
+        </div>
+        <div class="contentTread">
+          <h2>Welocome To my Demo Page</h2>
+          <p>Work in Progress </p>
+        </div>
+      </div>
+
+      
+      <div id="sent-1" style="display: none;">
+        <div class="header1">
+          <h2>Sent & Draft </h2>
+        </div>
+        <div class="contentTread">
+          <h2>Welocome To my Demo Page</h2>
+          <p>Work in Progress </p>
+        </div>
+      </div>
+
+      <div id="announcement-1" style="display: none;">
+        <div class="header1">
+          <h2>announcement </h2>
+        </div>
+        <div class="contentTread">
+          <h2>Welocome To my Demo Page</h2>
+          <p>Work in Progress </p>
+        </div>
+      </div>
+
+      <div id="general-1" style="display: none;">
+        <div class="header1">
+          <h2>General </h2>
+        </div>
+        <div class="contentTread">
+          <h2>Welocome To my Demo Page</h2>
+          <p>Work in Progress </p>
+        </div>
+      </div>
+
+      <div id="demoChannel-1" style="display: none;">
+        <div class="header1">
+          <h2>demoChannel </h2>
+        </div>
+        <div class="contentTread">
+          <h2>Welocome To my Demo Page</h2>
+          <p>Work in Progress </p>
+        </div>
+      </div>
+
+      <div id="demoProfile1-1" style="display: none;">
+        <div class="header1">
+          <h2>demoProfile1 </h2>
+        </div>
+        <div class="contentTread">
+          <h2>Welocome To my Demo Page</h2>
+          <p>Work in Progress </p>
+        </div>
+      </div>
+
+
+      <div id="demoProfile2-1" style="display: none;">
+        <div class="header1">
+          <h2>demoProfile2 </h2>
+        </div>
+        <div class="contentTread">
+          <h2>Welocome To my Demo Page</h2>
+          <p>Work in Progress </p>
+        </div>
+      </div>
+
+      <div id="worker-1" style="display: none;">
+        <div class="header1">
+          <h2>Worker </h2>
+        </div>
+        <div class="contentTread">
+          <h2>Welocome To my Demo Page</h2>
+          <p>Work in Progress </p>
+        </div>
+      </div>
+
+      <div id="channels-1" style="display: none;">
+        <div class="header1">
+          <h2>Channels </h2>
+        </div>
+        <div class="contentTread">
+          <h2>Welocome To my Demo Page</h2>
+          <p>Work in Progress </p>
+        </div>
+      </div>
+
+
+      <div id="demoApp1-1" style="display: none;">
+        <div class="header1">
+          <h2>demoApp1 </h2>
+        </div>
+        <div class="contentTread">
+          <h2>Welocome To my Demo Page</h2>
+          <p>Work in Progress </p>
+        </div>
+      </div>
+      
+      <div id="plugins-1" style="display: none;">
+        <div class="header1">
+          <h2>plugins </h2>
+        </div>
+        <div class="contentTread">
+          <h2>Welocome To my Demo Page</h2>
+          <p>Work in Progress </p>
+        </div>
+      </div>
+
+    </div>
+    
+    <script type="module" src="script.js"></script>
+  </body>
+</html>
